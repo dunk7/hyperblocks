@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperblocks - Magnetic Biodegradable Building Blocks</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-light: #81C784;
+            --primary-dark: #388E3C;
+            --secondary: #FF9800;
+            --secondary-light: #FFCC80;
+            --text-dark: #263238;
+            --text-light: #FFFFFF;
+            --background: #F5F5F5;
+            --section-bg: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--text-light);
+            border-radius: 8px;
+            margin-right: 10px;
+            position: relative;
+        }
+
+        .logo-icon::before, .logo-icon::after {
+            content: '';
+            position: absolute;
+            background-color: var(--primary);
+            border-radius: 4px;
+        }
+
+        .logo-icon::before {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: width 0.3s;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: var(--secondary);
+            color: var(--text-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, var(--primary-light), var(--primary));
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hero-bg-blocks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.2;
+        }
+
+        .block {
+            position: absolute;
+            background-color: var(--text-light);
+            border-radius: 8px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--section-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--section-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--text-light);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Product Section */
+        .products {
+            padding: 80px 0;
+            background-color: var(--background);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--section-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: var(--primary-light);
+            position: relative;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .product-description {
+            margin-bottom: 20px;
+        }
+
+        /* Eco Section */
+        .eco-friendly {
+            padding: 80px 0;
+            background-color: var(--primary-light);
+            color: var(--text-light);
+        }
+
+        .eco-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .eco-image {
+            flex: 1;
+            height: 400px;
+            background-color: var(--primary);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .eco-content {
+            flex: 1;
+        }
+
+        .eco-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .eco-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .eco-list li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .eco-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--section-bg);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--background);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 3rem;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            color: var(--primary-light);
+            opacity: 0.5;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            margin-right: 15px;
+        }
+
+        .author-name {
+            font-weight: bold;
+        }
+
+        .author-title {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #AAA;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #AAA;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .menu {
+                display: none;
+            }
+            
+            .eco-container {
+                flex-direction: column;
+            }
+            
+            .eco-image {
+                width: 100%;
+                height: 300px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon"></div>
+                    Hyperblocks
+                </a>
+                <ul class="menu">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#eco">Eco-Friendly</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+                <button class="cta-button">Shop Now</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-blocks">
+            <!-- Generated with JavaScript -->
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Build, Create, Imagine</h1>
+                <p>Hyperblocks are magnetic building blocks made from biodegradable corn-based plastic. Designed for endless creative possibilities while caring for our planet.</p>
+                <div class="hero-buttons">
+                    <button class="cta-button">Explore Kits</button>
+                    <button class="cta-button" style="background-color: transparent; border: 2px solid white;">Watch Demo</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Hyperblocks?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">M</div>
+                    <h3>Magnetic Snapping</h3>
+                    <p>Our powerful neodymium magnets ensure blocks connect effortlessly from any angle while staying firmly in place.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">E</div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Made from 100% biodegradable corn-based plastic, reducing environmental impact without compromising on quality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">C</div>
+                    <h3>Creative Freedom</h3>
+                    <p>Unique shapes and connection points allow for unlimited building possibilities that traditional blocks can't match.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Explore Our Kits</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- Product image placeholder -->
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Starter Kit</h3>
+                        <div class="product-price">$29.99</div>
+                        <p class="product-description">Perfect introduction to Hyperblocks with 50 pieces in 5 basic shapes and colors.</p>
+                        <button class="cta-button">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- Product image placeholder -->
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Architect Kit</h3>
+                        <div class="product-price">$49.99</div>
+                        <p class="product-description">Build impressive structures with 120 pieces including specialized connectors and supports.</p>
+                        <button class="cta-button">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- Product image placeholder -->
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">STEM Explorer Kit</h3>
+                        <div class="product-price">$69.99</div>
+                        <p class="product-description">Combines building with scientific principles through 150 pieces and an interactive guide.</p>
+                        <button class="cta-button">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eco-Friendly Section -->
+    <section class="eco-friendly" id="eco">
+        <div class="container">
+            <div class="eco-container">
+                <div class="eco-image">
+                    <!-- Eco-friendly image placeholder -->
+                </div>
+                <div class="eco-content">
+                    <h2>Planet-Friendly Play</h2>
+                    <p>At Hyperblocks, sustainability isn't just a feature—it's our foundation. We're committed to creating exceptional toys that don't harm our planet.</p>
+                    <ul class="eco-list">
+                        <li>Made from 100% biodegradable PLA derived from corn starch</li>
+                        <li>Fully compostable in industrial composting facilities</li>
+                        <li>Renewable resource base reduces fossil fuel dependence</li>
+                        <li>Non-toxic and safe for children of all ages</li>
+                        <li>Carbon-neutral manufacturing process</li>
+                    </ul>
+                    <button class="cta-button" style="background-color: var(--secondary);">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Parents & Educators Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">My 5-year-old daughter plays with Hyperblocks daily. The magnetic connection makes it easy for her small hands, and I love that they're eco-friendly!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div>
+                            <div class="author-name">Sarah Johnson</div>
+                            <div class="author-title">Parent of two</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">As a kindergarten teacher, I've tried many building toys. Hyperblocks offer the perfect balance of creative freedom and structural integrity. The children love them!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div>
+                            <div class="author-name">Michael Chen</div>
+                            <div class="author-title">Early Education Teacher</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The biodegradable aspect sold me initially, but the quality and versatility of Hyperblocks kept us coming back for more kits. A rare toy that's both sustainable and superior!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div>
+                            <div class="author-name">Emily Rodriguez</div>
+                            <div class="author-title">Environmental Scientist & Mom</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Building?</h2>
+            <p>Join thousands of families discovering the joy of creative, eco-friendly play with Hyperblocks. Free shipping on orders over $50!</p>
+            <button class="cta-button" style="background-color: white; color: var(--primary-dark); font-size: 1.2rem; padding: 15px 30px;">Shop All Kits</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-heading">Hyperblocks</h3>
+                    <p>Innovative magnetic building blocks made from biodegradable corn-based plastic. Designed for endless creative possibilities.</p>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="#" class="social-icon">F</a>
+                        <a href="#" class="social-icon">I</a>
+                        <a href="#" class="social-icon">T</a>
+                        <a href="#" class="social-icon">Y</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">All Products</a></li>
+                        <li><a href="#">Starter Kits</a></li>
+                        <li><a href="#">Expansion Packs</a></li>
+                        <li><a href="#">Educational Sets</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">About</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Materials</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Hyperblocks. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create floating blocks in the hero background
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroBlocks = document.querySelector('.hero-bg-blocks');
+            
+            for (let i = 0; i < 15; i++) {
+                const block = document.createElement('div');
+                block.classList.add('block');
+                
+                // Random size between 30 and 80px
+                const size = Math.floor(Math.random() * 50) + 30;
+                block.style.width = size + 'px';
+                block.style.height = size + 'px';
+                
+                // Random position
+                const left = Math.floor(Math.random() * 100);
+                const top = Math.floor(Math.random() * 100);
+                block.style.left = left + '%';
+                block.style.top = top + '%';
+                
+                // Random rotation
+                const rotation = Math.floor(Math.random() * 360);
+                block.style.transform = `rotate(${rotation}deg)`;
+                
+                heroBlocks.appendChild(block);
+            }
+        });
+    </script>
+</body>
+</html>
